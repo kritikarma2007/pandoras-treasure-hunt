@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Inter:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-horror: "Pirata One", system-ui;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  /* #0a0502 */
+  --color-horror-bg: #0a0502   ;
+ 
+  --color-horror-gold: #b8860b;
+  --color-horror-red: #4a0404;
+  --color-horror-paper: #f5f2ed;
+}
+
+@layer base {
+  body {
+    @apply bg-horror-bg text-horror-paper font-sans selection:bg-horror-gold selection:text-horror-bg;
+    /* background-image: url("https://www.transparenttextures.com/patterns/black-linen.png"); */
+    background-attachment: fixed;
+  }
+}
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(219, 158, 5, 0.5);
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
+}
+
+.animate-flicker {
+  animation: flicker 4s linear infinite;
+}
+
+@keyframes glitter {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.glitter-particle {
+  position: absolute;
+  width: 2.3px;
+  height: 2.3px;
+  background: var(--color-horror-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--color-horror-gold);
+  animation: glitter 3s infinite;
+}
+
+.gothic-border {
+  border: 1px solid rgba(184, 134, 11, 0.3);
+  position: relative;
+  transition: all 0.5s ease;
+  background: rgba(10, 5, 2, 0.6);
+}
+
+.gothic-border::before,
+.gothic-border::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--color-horror-gold);
+  z-index: 10;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.gothic-border::before { 
+  top: 0; 
+  left: 0; 
+  border-right: 0; 
+  border-bottom: 0; 
+}
+
+.gothic-border::after { 
+  bottom: 0; 
+  right: 0; 
+  border-left: 0; 
+  border-top: 0; 
+}
+
+.group:hover .gothic-border {
+  border-color: var(--color-horror-gold);
+  box-shadow: 0 0 15px rgba(184, 134, 11, 0.3);
+  background: rgba(20, 10, 5, 0.8);
+}
+
+.group:hover .gothic-border::before,
+.group:hover .gothic-border::after {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.vignette {
+  box-shadow: inset 0 0 150px rgba(0,0,0,0.9);
+}
